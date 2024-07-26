@@ -12,12 +12,13 @@ uniform float scrollerHeight;
 
 void main() {
   
+float calc =  scrollY / scrollerHeight * pointer.x;
 
-  float value = scrollY / scrollerHeight;
+float clamped = abs(clamp(calc, 0.0 , 1.0));
 
  
 
-  vec3 color = mix(colorA, colorB, value);
+  vec3 color = mix(colorA, colorB, clamped);
 
 
   gl_FragColor = vec4(color , 1.0);

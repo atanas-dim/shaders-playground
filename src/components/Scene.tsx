@@ -11,7 +11,8 @@ import fragmentShader from "./scene.frag";
 export const CustomMaterial = shaderMaterial(
   {
     time: 0,
-    scrollOffset: 0,
+    scrollY: 0,
+    scrollerHeight: 0,
     pointer: new Vector2(),
     colour: new Color("blue"),
     image: null,
@@ -26,12 +27,12 @@ const Flag: FC = () => {
   const shader = useRef<any>(null);
 
   useFrame(({ clock, gl, pointer, scene, camera }) => {
-    // console.log({ clock, gl, pointer, scene, camera });
     if (!shader.current) return;
     shader.current.time = clock.getElapsedTime();
     shader.current.pointer = pointer;
     shader.current.scrollY = window.scrollY;
     shader.current.scrollerHeight = document.body.offsetHeight;
+    console.log((window.scrollY / document.body.offsetHeight) * pointer.x);
   });
 
   return (
