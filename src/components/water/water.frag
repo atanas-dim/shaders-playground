@@ -12,7 +12,6 @@ varying float vZ;
 
 
 void main() {
-
   vec3 color = mix(colorA, colorB, vZ * 2.5); 
   gl_FragColor = vec4(color, 1.0);
 }
