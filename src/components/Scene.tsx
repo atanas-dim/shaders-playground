@@ -23,7 +23,7 @@ export const CustomMaterial = shaderMaterial(
 
 extend({ CustomMaterial });
 
-const Flag: FC = () => {
+const Water: FC = () => {
   const shader = useRef<any>(null);
 
   useFrame(({ clock, gl, pointer, scene, camera }) => {
@@ -38,7 +38,7 @@ const Flag: FC = () => {
   return (
     <Plane
       position={[0, 0.3, 0]}
-      args={[2, 2, 128, 128]}
+      args={[5, 5, 512, 512]}
       rotation={[-Math.PI / 2, 0, 0]}
       castShadow
       receiveShadow
@@ -57,16 +57,18 @@ const Flag: FC = () => {
 const Scene: FC = () => {
   return (
     <>
-      {/* <div id={"scroller"} className="w-full h-[10000dvh] z-10" /> */}
       <div className="size-full fixed inset-0">
-        <Canvas camera={{ position: [1.0, 1.0, 1.0] }} shadows>
-          <Flag />
+        <Canvas
+          camera={{ position: [1, 1.5, 2] }}
+          shadows
+          // style={{ background: "#000000" }}
+        >
           <axesHelper />
           {/* <OrbitControls /> */}
-          <ambientLight intensity={0.2} />
+          <ambientLight intensity={1.2} />
           <directionalLight
             position={[-10, 5, 10]}
-            intensity={0.75}
+            intensity={1.75}
             castShadow
           />
           <Plane
@@ -75,8 +77,9 @@ const Scene: FC = () => {
             rotation={[-Math.PI / 2, 0, 0]}
             receiveShadow
           >
-            <meshStandardMaterial color="lightgreen" side={2} />
+            <meshStandardMaterial color="purple" side={2} />
           </Plane>
+          <Water />
         </Canvas>
       </div>
     </>
