@@ -21,8 +21,9 @@ void main() {
   // Calculate fog factor based on depth
   float fogFactor = smoothstep(fogNear, fogFar, vFogDepth);
 
+  float defaultTransparency = 0.8;
   // Instead of mixing with fogColor, use the fog factor to adjust alpha
-  float alpha = 1.0 - fogFactor; // 1.0 means no fog (fully opaque), 0.0 means full fog (fully transparent)
+  float alpha = defaultTransparency - fogFactor; // 1.0 means no fog (fully opaque), 0.0 means full fog (fully transparent)
   
   gl_FragColor = vec4(color, alpha);
 }

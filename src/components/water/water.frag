@@ -16,7 +16,7 @@ varying float vFogDepth; // Get the depth from the vertex shader
 varying float vZ;
 
 void main() {
-    vec3 color = mix(colorA, colorB, vZ * 4.5);
+    vec3 color = mix(colorA, colorB, vZ * 9.5);
 
     // Calculate fog factor based on depth
     float fogFactor = smoothstep(fogNear, fogFar, vFogDepth);

@@ -33,7 +33,7 @@ const Scene: FC = () => {
           </Plane> */}
           <Water />
           <Curtain />
-          <PerspectiveCamera makeDefault position={[0, 0.7, 5]} />
+          <PerspectiveCamera makeDefault position={[0, 1, 4]} />
         </Canvas>
       </div>
     </>

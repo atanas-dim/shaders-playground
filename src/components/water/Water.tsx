@@ -45,7 +45,7 @@ const Water: FC = () => {
   return (
     <>
       <Plane
-        position={[0, 0.1, 0]}
+        position={[0, 0, 0]}
         args={[24, 24, 512 * 2, 512 * 2]}
         rotation={[-Math.PI / 2, 0, 0]}
         castShadow
@@ -59,6 +59,7 @@ const Water: FC = () => {
           shadowSide={2} // Enable shadows on both sides of the mesh
           transparent={true}
         />
+        {/* <meshStandardMaterial color="purple" side={2} /> */}
       </Plane>
     </>
   );

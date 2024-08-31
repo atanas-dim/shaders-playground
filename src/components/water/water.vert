@@ -21,11 +21,11 @@ void main() {
 
   // --- DISPLACEMENT START
   // Generate noise based on position and scrollY
-  float denseNoiseValue = noise(vec3(modelPosition.x * 18.8, modelPosition.z * 7.8, time * 0.7));
-  float sparseNoiseValue = noise(vec3(modelPosition.x * 0.55, modelPosition.z * 0.95, time * 0.5));
+  float denseNoiseValue = noise(vec3(modelPosition.x *  4.0, modelPosition.z * 14.0, time * 0.7));
+  float sparseNoiseValue = noise(vec3(modelPosition.x * 0.5 , modelPosition.z * 1.0, time * 0.5));
 
   // Apply noise to the y-coordinate to create a wave effect
-  modelPosition.y += denseNoiseValue * 0.01; // Adjust the multiplier for wave intensity
+  modelPosition.y += denseNoiseValue * 0.015; // Adjust the multiplier for wave intensity
   modelPosition.y += sparseNoiseValue * 0.02; // Adjust the multiplier for wave intensity
 
   vZ = modelPosition.y;

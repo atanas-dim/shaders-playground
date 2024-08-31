@@ -45,7 +45,7 @@ const Curtain: FC = () => {
     <Plane
       position={[0, 0.8, 0]}
       args={[1, 1, 512, 512]}
-      rotation={[-Math.PI / 1, -Math.PI / 1, -Math.PI / 1]}
+      rotation={[0, 0, 0]}
       castShadow
       receiveShadow
     >
@@ -57,6 +57,7 @@ const Curtain: FC = () => {
         shadowSide={2} // Enable shadows on both sides of the mesh
         transparent={true}
       />
+      {/* <meshStandardMaterial color="purple" side={2} /> */}
     </Plane>
   );
 };
