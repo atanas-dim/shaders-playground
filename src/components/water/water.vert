@@ -22,14 +22,14 @@ void main() {
     // Main wave displacement using a combination of sine waves and noise
     float mainWaveFrequency = 0.09; 
     float mainWaveSpeed = 0.015;
-    float mainWaveHeight = 0.0012 ;
+    float mainWaveHeight = 0.001 ;
 
     float baseWave = sin(modelPosition.x * mainWaveFrequency + time * mainWaveSpeed);
     baseWave += cos(modelPosition.z * mainWaveFrequency + time * mainWaveSpeed);
 
-    float noiseFrequencyX = 0.01; // Frequency for X direction (stretch horizontally)
-    float noiseFrequencyZ = 0.1; // Frequency for Z direction (regular)
-    float noiseAmplitude = 0.001  ; // Amplitude of the noise effect
+    float noiseFrequencyX = 0.02; // Frequency for X direction (stretch horizontally)
+    float noiseFrequencyZ = 0.2; // Frequency for Z direction (regular)
+    float noiseAmplitude = 0.0016  ; // Amplitude of the noise effect
 
     // Adjust noise frequencies
     float noiseValue = noise(vec3(modelPosition.x * noiseFrequencyX, modelPosition.z * noiseFrequencyZ, time * 0.2));

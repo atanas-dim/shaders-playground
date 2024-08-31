@@ -23,14 +23,14 @@ const Scene: FC = () => {
           <axesHelper />
           <OrbitControls />
           <ambientLight intensity={2.2} />
-          <directionalLight position={[-5, 1, 5]} intensity={5.75} castShadow />
+          <directionalLight position={[5, 1, 5]} intensity={5.75} castShadow />
           <Plane
-            position={[0, -0.25, 0]}
-            args={[5, 5, 16, 16]}
+            position={[0, -0.25, -3]}
+            args={[16, 16, 1, 1]}
             rotation={[-Math.PI / 2, 0, 0]}
             receiveShadow
           >
-            <meshStandardMaterial color="purple" side={2} />
+            <meshStandardMaterial color="sand" side={2} />
           </Plane>
           <Water />
           <Curtain />
