@@ -5,6 +5,7 @@ import Water from "@/components/water/Water";
 import Curtain from "./curtain/Curtain";
 import { CLEAR_COLOUR } from "@/resources/colours";
 import { FOG_FAR, FOG_NEAR } from "@/resources/scene";
+import { SphereGeometry } from "three";
 
 const Scene: FC = () => {
   return (
@@ -23,17 +24,21 @@ const Scene: FC = () => {
           <OrbitControls />
           <ambientLight intensity={2.2} />
           <directionalLight position={[-5, 1, 5]} intensity={5.75} castShadow />
-          {/* <Plane
-            position={[0, -1, 0]}
+          <Plane
+            position={[0, -0.25, 0]}
             args={[5, 5, 16, 16]}
             rotation={[-Math.PI / 2, 0, 0]}
             receiveShadow
           >
             <meshStandardMaterial color="purple" side={2} />
-          </Plane> */}
+          </Plane>
           <Water />
           <Curtain />
           <PerspectiveCamera makeDefault position={[0, 1, 4]} />
+          <mesh position={[0, 0, 0]} castShadow>
+            <sphereGeometry args={[0.25, 32, 32]} />
+            <meshStandardMaterial color="yellow" />
+          </mesh>
         </Canvas>
       </div>
     </>

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { CLEAR_COLOUR } from "@/resources/colours";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-full h-[800dvh]">{children}</body>
+      <body
+        className="w-full h-[800dvh]"
+        style={{ backgroundColor: CLEAR_COLOUR }}
+      >
+        {children}
+      </body>
     </html>
   );
 }
