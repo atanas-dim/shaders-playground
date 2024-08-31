@@ -8,11 +8,21 @@ uniform vec2 pointer;
 uniform float scrollY;
 uniform float scrollerHeight;
 
+uniform float fogNear;  // Existing fog uniform for near distance
+uniform float fogFar;   // Existing fog uniform for far distance
+
+varying float vFogDepth; // Get the depth from the vertex shader
+
 varying float vZ;
-
-
 
 void main() {
   vec3 color = mix(colorA, colorB, vZ * 3.5); 
-  gl_FragColor = vec4(color, 1.0);
+
+  // Calculate fog factor based on depth
+  float fogFactor = smoothstep(fogNear, fogFar, vFogDepth);
+
+  // Instead of mixing with fogColor, use the fog factor to adjust alpha
+  float alpha = 1.0 - fogFactor; // 1.0 means no fog (fully opaque), 0.0 means full fog (fully transparent)
+  
+  gl_FragColor = vec4(color, alpha);
 }

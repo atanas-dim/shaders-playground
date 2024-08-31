@@ -1,5 +1,12 @@
 #pragma glslify: noise = require('glsl-noise/simplex/3d')
 
+// Add these lines at the beginning of your vertex shader
+uniform vec3 fogColor;
+uniform float fogNear;
+uniform float fogFar;
+
+varying float vFogDepth; // To pass the depth to the fragment shader
+
 uniform float time;
 uniform vec2 pointer;
 uniform float scrollY;
@@ -24,6 +31,8 @@ void main() {
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
+
+  vFogDepth = -viewPosition.z; // Calculate the depth for fog
 
   gl_Position = projectedPosition; 
 }
