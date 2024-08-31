@@ -33,6 +33,7 @@ const Water: FC = () => {
   useFrame(({ clock, gl, pointer, scene, camera }) => {
     if (!shader.current) return;
     shader.current.time = clock.getElapsedTime();
+
     shader.current.pointer = pointer;
     shader.current.scrollY = window.scrollY;
     shader.current.scrollerHeight = document.body.offsetHeight;
@@ -42,22 +43,24 @@ const Water: FC = () => {
   });
 
   return (
-    <Plane
-      position={[0, 0.1, 0]}
-      args={[24, 24, 512, 512]}
-      rotation={[-Math.PI / 2, 0, 0]}
-      castShadow
-      receiveShadow
-    >
-      {/* @ts-ignore */}
-      <waterMaterial
-        ref={shader}
-        // wireframe
-        side={2}
-        shadowSide={2} // Enable shadows on both sides of the mesh
-        transparent={true}
-      />
-    </Plane>
+    <>
+      <Plane
+        position={[0, 0.1, 0]}
+        args={[24, 24, 512 * 2, 512 * 2]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        castShadow
+        receiveShadow
+      >
+        {/* @ts-ignore */}
+        <waterMaterial
+          ref={shader}
+          // wireframe
+          side={2}
+          shadowSide={2} // Enable shadows on both sides of the mesh
+          transparent={true}
+        />
+      </Plane>
+    </>
   );
 };
 

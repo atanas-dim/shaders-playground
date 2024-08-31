@@ -13,12 +13,13 @@ uniform float scrollY;
 uniform float scrollerHeight;
 
 varying float vZ;
+ 
 
 void main() {
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-
+  // --- DISPLACEMENT START
   // Generate noise based on position and scrollY
   float denseNoiseValue = noise(vec3(modelPosition.x * 18.8, modelPosition.z * 7.8, time * 0.7));
   float sparseNoiseValue = noise(vec3(modelPosition.x * 0.55, modelPosition.z * 0.95, time * 0.5));
@@ -31,8 +32,12 @@ void main() {
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
+  // --- DISPLACEMENT END
 
+
+  // --- FOG START
   vFogDepth = -viewPosition.z; // Calculate the depth for fog
-
+  // --- FOG END
+ 
   gl_Position = projectedPosition; 
 }
