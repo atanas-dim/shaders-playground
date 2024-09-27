@@ -17,8 +17,8 @@ varying float vZ;
 
 void main() {
     // Normalize vZ to a range between 0 and 1
-    float minZ = -0.005; // Assumed minimum height value
-    float maxZ = 0.005;  // Assumed maximum height value
+    float minZ = -0.005; // Assumed minimum height value (displacement)
+    float maxZ = 0.005;  // Assumed maximum height value (displacement)
     float normalizedHeight = (vZ - minZ) / (maxZ - minZ);
 
     // Calculate the color gradient using a bell curve shape
@@ -37,8 +37,10 @@ void main() {
     // Calculate fog factor based on depth
     float fogFactor = smoothstep(fogNear, fogFar, vFogDepth);
 
+    float maxOpacity = 0.75; // Maximum opacity value
+
     // Adjust alpha based on fog factor
-    float alpha = 0.95 - fogFactor; // 1.0 means no fog (fully opaque), 0.0 means full fog (fully transparent)
+    float alpha = maxOpacity - fogFactor; // 1.0 means no fog (fully opaque), 0.0 means full fog (fully transparent)
     
     gl_FragColor = vec4(color, alpha);
 }

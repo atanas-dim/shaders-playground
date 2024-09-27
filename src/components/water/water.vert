@@ -29,7 +29,7 @@ void main() {
 
     float noiseFrequencyX = 0.02; // Frequency for X direction (stretch horizontally)
     float noiseFrequencyZ = 0.2; // Frequency for Z direction (regular)
-    float noiseAmplitude = 0.0016  ; // Amplitude of the noise effect
+    float noiseAmplitude = 0.0016; // Amplitude of the noise effect
 
     // Adjust noise frequencies
     float noiseValue = noise(vec3(modelPosition.x * noiseFrequencyX, modelPosition.z * noiseFrequencyZ, time * 0.2));
@@ -45,7 +45,7 @@ void main() {
 
     // Apply a smoother function to round the peaks
     float edge0 = -0.85;
-    float edge1 = 0.85 ;
+    float edge1 = 0.85;
     float smoothValue = smoothstep(edge0, edge1, detailNoiseValue);
 
     // Combine main wave and surface detail displacements
@@ -54,7 +54,8 @@ void main() {
     // Apply displacement to the y-coordinate
     modelPosition.y += combinedDisplacement;
 
-    vZ = modelPosition.y;
+    // Set vZ to the displacement only, excluding the base y-position
+    vZ = combinedDisplacement;
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -67,5 +68,5 @@ void main() {
     // Pass depth for fog calculations
     vFogDepth = -viewPosition.z;
 
-    gl_Position = projectionMatrix * viewMatrix * modelPosition;
+    gl_Position = projectionMatrix * viewPosition;
 }
