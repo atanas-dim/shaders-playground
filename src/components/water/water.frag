@@ -22,25 +22,33 @@ void main() {
     float normalizedHeight = (vZ - minZ) / (maxZ - minZ);
 
     // Calculate the color gradient using a bell curve shape
-    // The brightness peaks at 80% and falls off towards 0% and 100%
     float peakPoint = 0.8; // The height at which the color is brightest (80% of the height)
     float adjustedHeight = abs(normalizedHeight - peakPoint) * (1.0 / peakPoint);
     float brightness = 1.0 - adjustedHeight; // Brightest at peakPoint, darker otherwise
 
     // Mix colors to create a brighter version
-    float mixFactor = 0.85;      // Brightening factor
+    float mixFactor = 0.85; // Brightening factor
     vec3 brighterColor = mix(colorB, white, mixFactor); // Brighter version of colorB
 
     // Mix colors based on the adjusted height
     vec3 color = mix(colorA, brighterColor, brightness);
 
+    // --- Calculate brightness (lightness) of the resulting color ---
+    // Use the luminance formula: (0.2126 * R) + (0.7152 * G) + (0.0722 * B) for perceptual brightness
+    float colorBrightness = dot(color, vec3(0.2126, 0.7152, 0.0722));
+
+    // --- Transparency based on brightness ---
+    float maxOpacity = 0.97;  // Maximum opacity for lightest (whitest) colors
+    float minOpacity = 0.1;   // Minimum opacity for darkest colors
+
+    // Map the brightness to opacity: higher brightness -> less transparent
+    float alpha = mix(minOpacity, maxOpacity, colorBrightness);
+
     // Calculate fog factor based on depth
     float fogFactor = smoothstep(fogNear, fogFar, vFogDepth);
 
-    float maxOpacity = 0.75; // Maximum opacity value
-
     // Adjust alpha based on fog factor
-    float alpha = maxOpacity - fogFactor; // 1.0 means no fog (fully opaque), 0.0 means full fog (fully transparent)
-    
+    alpha *= (1.0 - fogFactor);  // Reduce alpha as fog increases
+
     gl_FragColor = vec4(color, alpha);
 }
