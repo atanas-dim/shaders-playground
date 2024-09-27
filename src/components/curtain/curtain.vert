@@ -19,11 +19,11 @@ void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
 
-  float noiseValue = noise(vec3(modelPosition.x * 10.8, modelPosition.z * 7.8, time * 0.5));
+  float noiseValue = noise(vec3(modelPosition.x * 2.8, modelPosition.z * 3.8, time * 0.5));
 
-  modelPosition.z += noiseValue * 0.04;
+  modelPosition.z += noiseValue * 0.14;
 
-  modelPosition.z += sin(modelPosition.y * 2.6 + time * 0.9) * 0.05;
+  modelPosition.z += sin(modelPosition.y * 0.9 + time * 0.9) * 0.2;
  
   vZ = modelPosition.z;
 

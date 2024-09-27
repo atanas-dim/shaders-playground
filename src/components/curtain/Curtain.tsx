@@ -43,7 +43,7 @@ const Curtain: FC = () => {
 
   return (
     <Plane
-      position={[4, 4, 0]}
+      position={[4.3, 4, 0]}
       args={[4, 4, 512, 512]}
       rotation={[0, 0, 0]}
       castShadow

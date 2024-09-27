@@ -1,13 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Plane } from "@react-three/drei";
-import { use, useEffect, useRef, type FC } from "react";
-// import Water from "@/components/water/Water";
+import { type FC } from "react";
 import Curtain from "./curtain/Curtain";
 import { CLEAR_COLOUR } from "@/resources/colours";
 import { FOG_FAR, FOG_NEAR } from "@/resources/scene";
-import { SphereGeometry } from "three";
 
 import Water2 from "./water2/Water2";
+import Water from "./water/Water";
 
 const Scene: FC = () => {
   return (
@@ -34,9 +33,10 @@ const Scene: FC = () => {
           >
             <meshStandardMaterial color="beige" side={2} />
           </Plane>
-          <Water2 />
+          {/* <Water2 /> */}
+          <Water />
           <Curtain />
-          <mesh position={[0, 1, 0]} castShadow>
+          <mesh position={[0, 2, 0]} castShadow>
             <sphereGeometry args={[2, 32, 32]} />
             <meshStandardMaterial color="yellow" />
           </mesh>

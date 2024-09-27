@@ -45,8 +45,8 @@ const Water: FC = () => {
   return (
     <>
       <Plane
-        position={[0, 0, -3]}
-        args={[16, 16, 512 * 3, 512 * 3]}
+        position={[0, 1, 0]}
+        args={[64, 64, 512 * 3, 512 * 3]}
         rotation={[-Math.PI / 2, 0, 0]}
         castShadow
         receiveShadow

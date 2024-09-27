@@ -1,1 +1,1 @@
-export const CLEAR_COLOUR = "#f3fafd";
+export const CLEAR_COLOUR = "#ffffff";

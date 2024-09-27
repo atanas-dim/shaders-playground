@@ -20,7 +20,7 @@ void main() {
     // --- DISPLACEMENT START
 
     // Main wave displacement using a combination of sine waves and noise
-    float mainWaveFrequency = 0.09; 
+    float mainWaveFrequency = 0.1; 
     float mainWaveSpeed = 0.015;
     float mainWaveHeight = 0.001 ;
 
@@ -36,8 +36,8 @@ void main() {
     float waveValue = baseWave * mainWaveHeight + noiseValue * noiseAmplitude;
 
     // Surface details with stretched noise pattern
-    float detailFrequencyX = 3.75; // Stretched frequency for detail noise in X direction
-    float detailFrequencyZ = 10.5;  // Regular frequency for detail noise in Z direction
+    float detailFrequencyX = 1.75; // Stretched frequency for detail noise in X direction
+    float detailFrequencyZ = 6.5;  // Regular frequency for detail noise in Z direction
     float detailSpeed = 1.0;       // Speed of the surface detail noise
     float detailHeight = 0.005;     // Height of the surface details
 
