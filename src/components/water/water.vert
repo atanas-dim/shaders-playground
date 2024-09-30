@@ -36,8 +36,8 @@ void main() {
     float waveValue = baseWave * mainWaveHeight + noiseValue * noiseAmplitude;
 
     // Surface details with stretched noise pattern
-    float detailFrequencyX = 1.75; // Stretched frequency for detail noise in X direction
-    float detailFrequencyZ = 6.5;  // Regular frequency for detail noise in Z direction
+    float detailFrequencyX = 1.25; // Stretched frequency for detail noise in X direction
+    float detailFrequencyZ = 6.0;  // Regular frequency for detail noise in Z direction
     float detailSpeed = 1.0;       // Speed of the surface detail noise
     float detailHeight = 0.005;     // Height of the surface details
 
