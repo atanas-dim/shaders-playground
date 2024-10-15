@@ -33,8 +33,8 @@ const Scene: FC = () => {
           >
             <meshStandardMaterial color="beige" side={2} />
           </Plane>
-          <Water2 />
-          {/* <Water /> */}
+          {/* <Water2 /> */}
+          <Water />
           <Curtain />
           <mesh position={[0, 2, 0]} castShadow>
             <sphereGeometry args={[2, 32, 32]} />
