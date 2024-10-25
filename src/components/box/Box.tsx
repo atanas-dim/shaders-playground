@@ -50,7 +50,6 @@ const Box: FC = () => {
       const y = (pos.getY(i) + 0.5) * sy; // Adjusted for scaling
       const z = (pos.getZ(i) + 0.5) * sz; // Adjusted for scaling
 
-      // Set UVs according to desired mapping
       if (i < 8) {
         uv.setXY(i, z, y); // Side faces
       } else if (i < 16) {
@@ -60,17 +59,16 @@ const Box: FC = () => {
       }
     }
 
-    // Mark UVs for update
     uv.needsUpdate = true;
   };
 
   useEffect(() => {
-    resize(); // Call resize to adjust dimensions and UVs
-
+    // TODO Find fix for the reflection of the texture. Currently lost when calling resize. Resize updates the texture scaling on each side to be the same.
+    resize();
     const textures = [colorTexture, glossTexture, normalTexture, reflTexture];
 
     textures.forEach((texture) => {
-      texture.wrapS = texture.wrapT = RepeatWrapping; // Ensure proper wrapping
+      texture.wrapS = texture.wrapT = RepeatWrapping;
       texture.repeat.set(
         Math.ceil(INITIAL_BOX_WIDTH / TILE_SIZE),
         Math.ceil(INITIAL_BOX_HEIGHT / TILE_SIZE)
