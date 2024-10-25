@@ -5,8 +5,9 @@ import Curtain from "./curtain/Curtain";
 import { CLEAR_COLOUR } from "@/resources/colours";
 import { FOG_FAR, FOG_NEAR } from "@/resources/scene";
 
-import Water2 from "./water2/Water2";
-import Water from "./water/Water";
+// import Water2 from "@/components/water2/Water2";
+import Water from "@/components/water/Water";
+import Sphere from "@/components/sphere/Sphere";
 
 const Scene: FC = () => {
   return (
@@ -36,10 +37,7 @@ const Scene: FC = () => {
           {/* <Water2 /> */}
           <Water />
           <Curtain />
-          <mesh position={[0, 2, 0]} castShadow>
-            <sphereGeometry args={[2, 32, 32]} />
-            <meshStandardMaterial color="yellow" />
-          </mesh>
+          <Sphere />
           <PerspectiveCamera makeDefault position={[0, 3, 16]} />
         </Canvas>
       </div>
