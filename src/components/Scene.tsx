@@ -8,6 +8,7 @@ import { FOG_FAR, FOG_NEAR } from "@/resources/scene";
 // import Water2 from "@/components/water2/Water2";
 import Water from "@/components/water/Water";
 import Sphere from "@/components/sphere/Sphere";
+import Box from "@/components/box/Box";
 
 const Scene: FC = () => {
   return (
@@ -37,7 +38,8 @@ const Scene: FC = () => {
           {/* <Water2 /> */}
           <Water />
           <Curtain />
-          <Sphere />
+          {/* <Sphere /> */}
+          <Box />
           <PerspectiveCamera makeDefault position={[0, 3, 16]} />
         </Canvas>
       </div>
