@@ -13,7 +13,7 @@ import Box from "@/components/box/Box";
 const Scene: FC = () => {
   return (
     <>
-      <div className="size-full fixed inset-0">
+      <div className="size-full">
         <Canvas
           shadows
           gl={{ antialias: true }}

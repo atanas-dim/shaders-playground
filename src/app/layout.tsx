@@ -14,10 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="w-full h-[800dvh]"
-        style={{ backgroundColor: CLEAR_COLOUR }}
-      >
+      <body className="" style={{ backgroundColor: CLEAR_COLOUR }}>
         {children}
       </body>
     </html>

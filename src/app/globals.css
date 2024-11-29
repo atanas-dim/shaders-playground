@@ -4,5 +4,5 @@
 
 html,
 body {
-  @apply size-full;
+  @apply w-screen h-screen;
 }
