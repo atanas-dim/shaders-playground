@@ -14,14 +14,16 @@ const TEST_MAP = "/textures/pool-tiles/3x3squares.jpg";
 const INITIAL_BOX_WIDTH = 1;
 const INITIAL_BOX_HEIGHT = 1;
 const INITIAL_BOX_DEPTH = 1;
-const BOX_WIDTH = 2.54; // Width of the box
-const BOX_HEIGHT = 1.25; // Height of the box
+const BOX_WIDTH = 2.5; // Width of the box
+const BOX_HEIGHT = 1.5; // Height of the box
 const BOX_DEPTH = 1; // Depth of the box
-const TILE_SIZE = 1.2; // Tile size in world units
+const TILE_SIZE = 3; // 3 vertices per tile
 
-const VERTICES_X = 3;
-const INITIAL_VERTICES_Y = 3;
-const VERTICES_Z = 3;
+const VERTICE_DENSITY = 3; // Number of vertices per tile
+
+const VERTICES_X = Math.floor(VERTICE_DENSITY * BOX_WIDTH);
+const VERTICES_Y = Math.floor(VERTICE_DENSITY * BOX_HEIGHT);
+const VERTICES_Z = Math.floor(VERTICE_DENSITY * BOX_DEPTH);
 
 const Box: FC = () => {
   const textures = useLoader(TextureLoader, [
@@ -37,14 +39,12 @@ const Box: FC = () => {
 
   const resize = () => {
     if (!boxRef.current) return;
+
     const geometry = boxRef.current.geometry;
-
-    // Set the box scale
-    boxRef.current.scale.set(BOX_WIDTH, BOX_HEIGHT, BOX_DEPTH);
-
-    // Adjust UV mapping
-    const pos = geometry.getAttribute("position");
     const uv = geometry.getAttribute("uv");
+    const pos = geometry.getAttribute("position");
+
+    boxRef.current.scale.set(BOX_WIDTH, BOX_HEIGHT, BOX_DEPTH);
 
     const width = BOX_WIDTH;
     const height = BOX_HEIGHT;
@@ -57,27 +57,19 @@ const Box: FC = () => {
 
       console.log({ x, y, z });
 
-      if (Math.abs(z) === 0.5 * depth) {
-        // Front and back faces
-        uv.setXY(
-          i,
-          (x + 0.5 * width) / width / TEXTURE_MAP_ASPECT,
-          (y + 0.5 * height) / height
-        );
-      } else if (Math.abs(x) === 0.5 * width) {
-        // Left and right faces
-        uv.setXY(
-          i,
-          (z + 0.5 * depth) / depth / TEXTURE_MAP_ASPECT,
-          (y + 0.5 * height) / height
-        );
-      } else if (Math.abs(y) === 0.5 * height) {
-        // Top and bottom faces
-        uv.setXY(
-          i,
-          (x + 0.5 * width) / width / TEXTURE_MAP_ASPECT,
-          (z + 0.5 * depth) / depth
-        );
+      const leftRightFace = x === 0 || x === width;
+      const topBottomFace = y === 0 || y === height;
+      const frontBackFace = z === 0 || z === depth;
+
+      if (frontBackFace) {
+        uv.setX(x);
+        uv.setY(y);
+      } else if (topBottomFace) {
+        uv.setX(i, x / width);
+        uv.setZ(i, 1);
+      } else if (leftRightFace) {
+        uv.setX(i, 0);
+        uv.setY(i, 0);
       }
     }
 
@@ -85,16 +77,21 @@ const Box: FC = () => {
   };
 
   useEffect(() => {
-    resize();
+    if (!boxRef.current) return;
 
-    // Update texture repeat to match the box dimensions and aspect
     textures.forEach((texture) => {
       texture.wrapS = texture.wrapT = RepeatWrapping;
-      texture.repeat.set(
-        BOX_WIDTH / TILE_SIZE / TEXTURE_MAP_ASPECT,
-        BOX_HEIGHT / TILE_SIZE
-      );
+
+      const repeatX = VERTICES_X / TILE_SIZE;
+      const repeatY = VERTICES_Y / TILE_SIZE;
+
+      console.log(repeatX, repeatY);
+
+      texture.repeat.set(repeatX, repeatY);
     });
+
+    // Resize and update UVs
+    resize();
   }, [textures]);
 
   return (
@@ -105,22 +102,11 @@ const Box: FC = () => {
           INITIAL_BOX_HEIGHT,
           INITIAL_BOX_DEPTH,
           VERTICES_X,
-          INITIAL_VERTICES_Y,
+          VERTICES_Y,
           VERTICES_Z,
         ]}
       />
-      <meshStandardMaterial
-        map={testMap}
-        displacementMap={testMap}
-        displacementScale={0.015}
-        // map={colorTexture}
-        // roughnessMap={glossTexture}
-        // roughness={0.5}
-        // envMap={reflTexture}
-        // metalness={0.15}
-        // displacementMap={dispMap}
-        // displacementScale={0.015}
-      />
+      <meshStandardMaterial map={testMap} />
     </mesh>
   );
 };
